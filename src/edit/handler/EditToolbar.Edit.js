@@ -140,6 +140,8 @@ L.EditToolbar.Edit = L.Handler.extend({
 			} else if (layer instanceof L.Marker) { // Marker
 				layer.setLatLng(this._uneditedLayerProps[id].latlng);
 			}
+
+			layer.fire('revert-edited', { layer: layer });
 		}
 	},
 
@@ -227,7 +229,9 @@ L.EditToolbar.Edit = L.Handler.extend({
 
 	_disableLayerEdit: function (e) {
 		var layer = e.layer || e.target || e;
+
 		layer.edited = false;
+		layer.editing.disable();
 
 		// Reset layer styles to that of before select
 		if (this._selectedPathOptions) {
