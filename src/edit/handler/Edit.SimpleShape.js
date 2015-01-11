@@ -11,11 +11,11 @@ L.Edit.SimpleShape = L.Handler.extend({
 			className: 'leaflet-div-icon leaflet-editing-icon leaflet-edit-resize'
 		}),
 		touchMoveIcon: new L.DivIcon({
-			iconSize: new L.Point(25, 25),
+			iconSize: new L.Point(30, 30),
 			className: 'leaflet-div-icon leaflet-editing-icon leaflet-edit-move leaflet-touch-icon'
 		}),
 		touchResizeIcon: new L.DivIcon({
-			iconSize: new L.Point(25, 25),
+			iconSize: new L.Point(30, 30),
 			className: 'leaflet-div-icon leaflet-editing-icon leaflet-edit-resize leaflet-touch-icon'
 		}),
 	},
@@ -156,6 +156,8 @@ L.Edit.SimpleShape = L.Handler.extend({
 		marker.setOpacity(1);
 
 		this._fireEdit();
+		e.preventDefault();
+		e.stopPropagation();
 	},
 
 	_onTouchStart: function (e) {
@@ -176,6 +178,8 @@ L.Edit.SimpleShape = L.Handler.extend({
 		}
 	
 		this._shape.fire('editstart');
+		e.preventDefault();
+		e.stopPropagation();
 	},
 
 	_onTouchMove: function (e) {
@@ -192,7 +196,8 @@ L.Edit.SimpleShape = L.Handler.extend({
 		this._shape.redraw();
 		
 		// prevent touchcancel in IOS
-		// e.preventDefault();
+		e.preventDefault();
+		e.stopPropagation();
 		return false;
 	},
 
@@ -201,6 +206,8 @@ L.Edit.SimpleShape = L.Handler.extend({
 		marker.setOpacity(1);
 		this.updateMarkers();
 		this._fireEdit();
+		e.preventDefault();
+		e.stopPropagation();
 	},
 
 	_move: function () {
