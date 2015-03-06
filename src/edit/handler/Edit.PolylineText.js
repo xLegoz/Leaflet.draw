@@ -33,9 +33,14 @@ L.Edit.PolylineText = L.Handler.extend({
             this.keyhander = this._handleKeys.bind(this);
 
             $('#map').on('keypress', this.keyhander);
+            $("body").one('click', this._removeKeyHandler.bind(this));
             this.text = "";
             this._poly.setText(this.text, this.options.text);
         }
+    },
+
+    _removeKeyHandler: function() {
+        $('#map').off('keypress', this.keyhander);
     },
 
     _handleKeys: function (e) {
