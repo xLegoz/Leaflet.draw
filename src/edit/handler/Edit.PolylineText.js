@@ -4,6 +4,10 @@ L.Edit = L.Edit || {};
  * L.Edit.Poly is an editing handler for polylines and polygons.
  */
 
+L.MaterialPopup = L.Popup.extend({
+  // You changes here
+});
+
 L.Edit.PolylineText = L.Handler.extend({
     options: {
         icon: new L.DivIcon({
@@ -34,6 +38,18 @@ L.Edit.PolylineText = L.Handler.extend({
 
             $('#map').on('keypress', this.keyhander);
             $("body").one('click', this._removeKeyHandler.bind(this));
+
+            var content = " <div style='width: 50%;'> \
+                                <span class='fa-stack fa-4x'> \
+                                    <i class='fa fa-circle fa-stack-2x'></i> \
+                                    <i class='fa fa-pencil fa-stack-1x fa-inverse'></i> \
+                                </span> \
+                            </div> \
+                            <div style='width: 50%;'> \
+                                <i class='fa fa-times-circle fa-4x'></i> \
+                            </div>";
+
+            this.bindPopup(content);
             this.text = "";
             this._poly.setText(this.text, this.options.text);
         }
