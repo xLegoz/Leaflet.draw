@@ -10,6 +10,7 @@ var deps = {
 		src: [
 			'draw/handler/Draw.Feature.js',
 			'draw/handler/Draw.Polyline.js',
+			'draw/handler/Draw.PolylineText.js',
 			'draw/handler/Draw.Polygon.js',
 			'draw/handler/Draw.SimpleShape.js',
 			'draw/handler/Draw.Rectangle.js',
@@ -23,6 +24,7 @@ var deps = {
 	EditHandlers: {
 		src: [
 			'edit/handler/Edit.Poly.js',
+			'edit/handler/Edit.PolylineText.js',
 			'edit/handler/Edit.SimpleShape.js',
 			'edit/handler/Edit.Rectangle.js',
 			'edit/handler/Edit.Circle.js'

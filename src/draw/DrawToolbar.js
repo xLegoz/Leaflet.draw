@@ -30,6 +30,11 @@ L.DrawToolbar = L.Toolbar.extend({
 				title: L.drawLocal.draw.toolbar.buttons.polyline
 			},
 			{
+				enabled: this.options.polylinetext,
+				handler: new L.Draw.PolylineText(map, this.options.polylinetext),
+				title: L.drawLocal.draw.toolbar.buttons.polylinetext
+			},
+			{
 				enabled: this.options.polygon,
 				handler: new L.Draw.Polygon(map, this.options.polygon),
 				title: L.drawLocal.draw.toolbar.buttons.polygon

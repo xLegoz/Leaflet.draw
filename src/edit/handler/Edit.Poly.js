@@ -245,28 +245,34 @@ L.Edit.Poly = L.Handler.extend({
 
 L.Polyline.addInitHook(function () {
 
-	// Check to see if handler has already been initialized. This is to support versions of Leaflet that still have L.Handler.PolyEdit
-	if (this.editing) {
-		return;
-	}
+    // Check to see if handler has already been initialized. This is to support versions of Leaflet that still have L.Handler.PolyEdit
+    if (this.editing) {
+        return;
+    }
 
-	if (L.Edit.Poly) {
-		this.editing = new L.Edit.Poly(this);
+    if (L.Edit.Poly) {
+        var editobj = L.Edit.Poly;
+        if (this.options.textlabel) {
+            editobj = L.Edit.PolylineText;
+        }
 
-		if (this.options.editable) {
-			this.editing.enable();
-		}
-	}
+        this.editing = new editobj(this);
 
-	this.on('add', function () {
-		if (this.editing && this.editing.enabled()) {
-			this.editing.addHooks();
-		}
-	});
 
-	this.on('remove', function () {
-		if (this.editing && this.editing.enabled()) {
-			this.editing.removeHooks();
-		}
-	});
+        if (this.options.editable) {
+            this.editing.enable();
+        }
+    }
+
+    this.on('add', function () {
+        if (this.editing && this.editing.enabled()) {
+            this.editing.addHooks();
+        }
+    });
+
+    this.on('remove', function () {
+        if (this.editing && this.editing.enabled()) {
+            this.editing.removeHooks();
+        }
+    });
 });
