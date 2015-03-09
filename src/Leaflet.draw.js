@@ -49,6 +49,14 @@ L.drawLocal = {
 					end: 'Click last point to finish line.'
 				}
 			},
+			polylinetext: {
+				error: '<strong>Error:</strong> shape edges cannot cross!',
+				tooltip: {
+					start: 'Click to create the center of a label.',
+					cont: 'Click to continue drawing line.',
+					end: 'Click last point to finish line.'
+				}
+			},
 			rectangle: {
 				tooltip: {
 					start: 'Click and drag to draw rectangle.'

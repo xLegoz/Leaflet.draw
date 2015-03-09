@@ -32,8 +32,9 @@ L.Draw.PolylineText = L.Draw.Feature.extend({
     },
 
     initialize: function (map, options) {
+        this.textlabel = true;
         // Need to set this here to ensure the correct message is used.
-        this.options.drawError.message = L.drawLocal.draw.handlers.polyline.error;
+        this.options.drawError.message = L.drawLocal.draw.handlers.polylinetext.error;
 
         // Merge default drawError options with custom options
         if (options && options.drawError) {
@@ -200,20 +201,11 @@ L.Draw.PolylineText = L.Draw.Feature.extend({
     },
 
     _vertexChanged: function (latlng, added) {
-        this._updateFinishHandler();
-
         this._updateRunningMeasure(latlng, added);
 
         this._clearGuides();
 
         this._updateTooltip();
-        
-        var markerCount = this._markers.length;
-        if (markerCount === 2) {
-            this._markers[markerCount - 1].on('click', this._finishShape, this);
-            this._markers[markerCount - 1].fire('click', {});
-        }
-
     },
 
     _onMouseDown: function (e) {
@@ -230,17 +222,18 @@ L.Draw.PolylineText = L.Draw.Feature.extend({
             if (Math.abs(distance) < 9 * (window.devicePixelRatio || 1)) {
                 this.addVertex(e.latlng);
             }
+
+            var markerCount = this._markers.length;
+            if (markerCount === 1) {
+                var shifted_latlng = e.latlng;
+                shifted_latlng.lng += 0.0001;
+                this.addVertex(shifted_latlng);
+                this._markers[markerCount - 1].once('click', this._finishShape, this);
+                this._markers[markerCount - 1].fire('click', {});
+            }
+            
         }
         this._mouseDownOrigin = null;
-    },
-
-    _updateFinishHandler: function () {
-        var markerCount = this._markers.length;
-        // The last marker should have a click handler to close the polyline
-        // if (markerCount === 2) {
-        //     this._markers[markerCount - 1].on('click', this._finishShape, this);
-        //     this._markers[markerCount - 1].fire('click', {});
-        // }
     },
 
     _createMarker: function (latlng) {
@@ -339,19 +332,19 @@ L.Draw.PolylineText = L.Draw.Feature.extend({
 
         if (this._markers.length === 0) {
             labelText = {
-                text: L.drawLocal.draw.handlers.polyline.tooltip.start
+                text: L.drawLocal.draw.handlers.polylinetext.tooltip.start
             };
         } else {
             distanceStr = showLength ? this._getMeasurementString() : '';
 
             if (this._markers.length === 1) {
                 labelText = {
-                    text: L.drawLocal.draw.handlers.polyline.tooltip.cont,
+                    text: L.drawLocal.draw.handlers.polylinetext.tooltip.cont,
                     subtext: distanceStr
                 };
             } else {
                 labelText = {
-                    text: L.drawLocal.draw.handlers.polyline.tooltip.end,
+                    text: L.drawLocal.draw.handlers.polylinetext.tooltip.end,
                     subtext: distanceStr
                 };
             }

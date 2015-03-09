@@ -16,13 +16,12 @@ L.Edit.PolylineText = L.Handler.extend({
         }),
         fill: false,
         text: {
-            class: 'leaflet-textlabel',
-            transform: 'translate(0, 20)'
         }
     },
 
     initialize: function (poly, options) {
         this._poly = poly;
+        this._poly.textlabel = true;
         L.setOptions(this, options);
         this._poly.setStyle(this.options);
     },
@@ -34,44 +33,8 @@ L.Edit.PolylineText = L.Handler.extend({
             }
             this._poly._map.addLayer(this._markerGroup);
 
-            this.keyhander = this._handleKeys.bind(this);
-
-            $('#map').on('keypress', this.keyhander);
-            $("body").one('click', this._removeKeyHandler.bind(this));
-
-            var content = " <div style='width: 50%;'> \
-                                <span class='fa-stack fa-4x'> \
-                                    <i class='fa fa-circle fa-stack-2x'></i> \
-                                    <i class='fa fa-pencil fa-stack-1x fa-inverse'></i> \
-                                </span> \
-                            </div> \
-                            <div style='width: 50%;'> \
-                                <i class='fa fa-times-circle fa-4x'></i> \
-                            </div>";
-
-            this.bindPopup(content);
             this.text = "";
             this._poly.setText(this.text, this.options.text);
-        }
-    },
-
-    _removeKeyHandler: function() {
-        $('#map').off('keypress', this.keyhander);
-    },
-
-    _handleKeys: function (e) {
-        var key = e.keyCode;
-        var s = String.fromCharCode(key);
-        if (key === 32) {
-            this.text += " ";
-            this._updatePolyText();
-        }
-        else if (key === 13) {
-            $('#map').off('keypress', this.keyhander);
-        }
-        else {
-            this.text += s;
-            this._updatePolyText();   
         }
     },
 
