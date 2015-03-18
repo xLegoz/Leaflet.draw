@@ -13,8 +13,9 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 			timeout: 2500
 		},
 		icon: new L.DivIcon({
-			iconSize: new L.Point(8, 8),
-			className: 'leaflet-div-icon leaflet-editing-icon'
+			iconSize: new L.Point(20, 20),
+			html: '<div class="CustomEditPolyIcon"><div class="leaflet-div-icon leaflet-editing-icon"></div></div>',
+			className: ''
 		}),
 		guidelineDistance: 20,
 		maxGuideLineLength: 4000,

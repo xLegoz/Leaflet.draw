@@ -3,13 +3,13 @@ L.Edit = L.Edit || {};
 L.Edit.SimpleShape = L.Handler.extend({
 	options: {
 		moveIcon: new L.DivIcon({
-			iconSize: new L.Point(8, 8),
-			className: 'leaflet-div-icon leaflet-editing-icon leaflet-edit-move'
-		}),
+			iconSize: new L.Point(20, 20),
+			html: '<div class="CustomEditPolyIcon"><div class="leaflet-div-icon leaflet-editing-icon"></div></div>',
+			className: ''}),
 		resizeIcon: new L.DivIcon({
-			iconSize: new L.Point(8, 8),
-			className: 'leaflet-div-icon leaflet-editing-icon leaflet-edit-resize'
-		})
+			iconSize: new L.Point(20, 20),
+			html: '<div class="CustomEditPolyIcon"><div class="leaflet-div-icon leaflet-editing-icon"></div></div>',
+			className: ''})
 	},
 
 	initialize: function (shape, options) {

@@ -7,8 +7,9 @@ L.Edit = L.Edit || {};
 L.Edit.Poly = L.Handler.extend({
 	options: {
 		icon: new L.DivIcon({
-			iconSize: new L.Point(8, 8),
-			className: 'leaflet-div-icon leaflet-editing-icon'
+			iconSize: new L.Point(20, 20),
+			html: '<div class="CustomEditPolyIcon"><div class="leaflet-div-icon leaflet-editing-icon"></div></div>',
+			className: ''
 		})
 	},
 
